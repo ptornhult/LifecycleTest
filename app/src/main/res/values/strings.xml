@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lifecycle Tests</string>
+    <string name="count">Count: %d</string>
+</resources>
