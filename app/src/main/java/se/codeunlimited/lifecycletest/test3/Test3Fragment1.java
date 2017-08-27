@@ -15,12 +15,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import se.codeunlimited.lifecycletest.LogFragment;
 import se.codeunlimited.lifecycletest.R;
+import se.codeunlimited.lifecycletest.TestViewModel;
 import timber.log.Timber;
 
 public class Test3Fragment1 extends LogFragment {
     private Unbinder unbinder;
 
-    private Test3ViewModel test3ViewModel;
+    private TestViewModel viewModel;
     @BindView(R.id.content) View content;
     @BindView(R.id.text) TextView text;
     @BindView(R.id.button) Button button;
@@ -29,10 +30,10 @@ public class Test3Fragment1 extends LogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        test3ViewModel = ViewModelProviders.of(getActivity()).get(Test3ViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(TestViewModel.class);
 
         // This will not trigger an update after the backstack is popped and this fragment become visible again
-        //test3ViewModel.getCounter().observe((LifecycleOwner) getActivity(), this::onCounterUpdate);
+        //viewModel.getCounter().observe((LifecycleOwner) getActivity(), this::onCounterUpdate);
     }
 
     @Nullable
@@ -46,7 +47,7 @@ public class Test3Fragment1 extends LogFragment {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
 
-        content.setOnClickListener(v -> test3ViewModel.incCounter());
+        content.setOnClickListener(v -> viewModel.incCounter());
 
         button.setOnClickListener(v -> {
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -65,9 +66,16 @@ public class Test3Fragment1 extends LogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        test3ViewModel.getCounter().observe(this, this::onCounterUpdate);
+        viewModel.getCounter().observe(this, this::onCounterUpdate);
     }
 
+    @Override
+    public void onStop() {
+        viewModel.getCounter().removeObservers(this);
+        // This will not work since this::onCounterUpdate will create a new method reference
+        //viewModel.getCounter().removeObserver(this::onCounterUpdate);
+        super.onStop();
+    }
 
     private void onCounterUpdate(Integer val) {
         Timber.i("Counter value: %d", val);

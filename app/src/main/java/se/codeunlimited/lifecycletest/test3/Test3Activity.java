@@ -11,14 +11,10 @@ import se.codeunlimited.lifecycletest.R;
 
 public class Test3Activity extends LogActivity {
 
-
-    @BindView(R.id.placeholder) View placeholder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test3);
-        ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

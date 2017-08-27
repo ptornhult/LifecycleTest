@@ -1,4 +1,4 @@
-package se.codeunlimited.lifecycletest.test3;
+package se.codeunlimited.lifecycletest;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -7,10 +7,10 @@ import android.arch.lifecycle.ViewModel;
 import timber.log.Timber;
 
 
-public class Test3ViewModel extends ViewModel {
+public class TestViewModel extends ViewModel {
     private final MutableLiveData<Integer> counter = new MutableLiveData<>();
 
-    public Test3ViewModel() {
+    public TestViewModel() {
         Timber.d("constructor");
     }
 

@@ -13,12 +13,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import se.codeunlimited.lifecycletest.LogFragment;
 import se.codeunlimited.lifecycletest.R;
+import se.codeunlimited.lifecycletest.TestViewModel;
 import timber.log.Timber;
 
 public class Test2Fragment extends LogFragment {
     private Unbinder unbinder;
 
-    private Test2ViewModel test2ViewModel;
+    private TestViewModel viewModel;
     @BindView(R.id.content) View content;
     @BindView(R.id.text) TextView text;
 
@@ -26,8 +27,8 @@ public class Test2Fragment extends LogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        test2ViewModel = ViewModelProviders.of(this).get(Test2ViewModel.class);
-        test2ViewModel.getCounter().observe(this, this::onCounterUpdate);
+        viewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+        viewModel.getCounter().observe(this, this::onCounterUpdate);
     }
 
     @Nullable
@@ -41,7 +42,7 @@ public class Test2Fragment extends LogFragment {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
 
-        content.setOnClickListener(v -> test2ViewModel.incCounter());
+        content.setOnClickListener(v -> viewModel.incCounter());
 
     }
 

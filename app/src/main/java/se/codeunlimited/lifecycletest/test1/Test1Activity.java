@@ -9,14 +9,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import se.codeunlimited.lifecycletest.LogActivity;
 import se.codeunlimited.lifecycletest.R;
+import se.codeunlimited.lifecycletest.TestViewModel;
 import timber.log.Timber;
 
 public class Test1Activity extends LogActivity {
 
-    @BindView(R.id.text)
-    TextView text;
+    @BindView(R.id.text) TextView text;
 
-    private Test1ViewModel viewModel;
+    private TestViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class Test1Activity extends LogActivity {
         setContentView(R.layout.activity_test1);
         ButterKnife.bind(this);
 
-        viewModel = ViewModelProviders.of(this).get(Test1ViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(TestViewModel.class);
         viewModel.getCounter().observe(this, this::onCounterUpdate);
     }
 
