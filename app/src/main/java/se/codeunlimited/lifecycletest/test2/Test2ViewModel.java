@@ -20,7 +20,7 @@ public class Test2ViewModel extends ViewModel {
 
     public void incCounter() {
         Integer value = counter.getValue();
-        counter.setValue(value != null ? (value + 1) : 0);
+        counter.setValue(value != null ? (value + 1) : 1);
     }
 
     @Override
