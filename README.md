@@ -1,6 +1,8 @@
 # LifecycleTest
 Testing how Android Lifecycle behave in Activities and Fragments
 
+Read the [full article here](https://medium.com/@peter.tornhult/lifecycle-fragments-backstack-f32e34f012d5)
+
 ## Test #1 - Activity + LifeCycle
 A TextView is shown to the user.
 Since counter hasn't been set, the view will display the original text from the layout file.
